@@ -65,17 +65,17 @@
         */
         var arr = [10, 45, 99, 1, 34, 78, 100, 22, 2, 55];
         function setOrdering(arrParam){   
-            for(var j=0; j<arr.length;j++){
-            for(var i=0; i<arr.length-1;i++){
-                if(arr[i]>arr[i+1]){
-                    temp = arr[i];
-                    arr[i] = arr[i+1];
-                    arr[i+1] = temp;
-                    //교환이 일어날때마다 진행여부 출력
-                    showArray(arr);
-                }
+            for(var i=0; i<arrParam.length-1; i++){
+                for(var j=0; j<arrParam.length-1-i; j++){
+                    if(arrParam[j]>arrParam[j+1]){
+                        temp = arrParam[j];
+                        arrParam[j] = arrParam[j+1];
+                        arrParam[j+1] = temp;
+                        //교환이 일어날때마다 진행여부 출력
+                        showArray(arr);
+                    }
             
-            }
+                }
             }
              
         }
