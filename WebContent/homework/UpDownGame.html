@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+        fieldset{
+            font-family: 'Noto Sans KR', sans-serif;
+            width:330px;
+        }
+        #num{
+            width:60px;
+        }
+        fieldset span img{
+            padding-top:20px;
+            width:300px;
+        }
+        .cnt{
+            font-size: 15pt;
+            font-weight: bold;
+        }
+        .cnt1{
+            font-size: 30pt;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+    
+    var count = 0;
+    var rdNumber = parseInt((Math.random()*100)+1);
+ 
+    function getNumber(){
+
+        var number = document.getElementById("num").value;
+        if(number>0 && number<=100){
+            if(number < rdNumber){
+                var img_tag = document.getElementById("change");
+                img_tag.src = "/images/down.jpg";
+            }else if(number > rdNumber){
+                var img_tag = document.getElementById("change");
+                img_tag.src = "/images/up.jpg";
+            }else if(number==rdNumber){
+                alert("정답입니다.");
+                var img_tag = document.getElementById("change");
+                img_tag.src = "/images/answer.jpeg";
+
+                var rload = document.getElementById("load");
+                    if(rload.style.display=="none"){
+                        rload.style.display="inline";
+                    }
+            }    
+        }else{
+            alert("1~100 사이의 숫자를 입력해 주세요.");
+            var img_tag = document.getElementById("change");
+            img_tag.src = "/images/error.jpg";
+            return;
+        }
+        count++;
+        if(count>=7){
+            alert("시도횟수가 초과하였습니다. 게임을 재시작합니다.");
+            window.location.reload();
+            
+        }
+        document.getElementById("count").innerHTML = count;  
+    }
+
+    function reload(){
+        location.reload();
+    }
+ 
+    </script>
+</head>
+<body>
+    <fieldset>
+    <h1>업다운게임</h1>
+ 
+    <h2>1~100사이의 숫자를 입력하세요</h2>
+    
+    <span class="cnt">시도횟수 :</span>
+    <span id="count" class="cnt1">0</span>
+    <span class="cnt">회</span>
+    <br><br>
+    <span>
+        숫자입력 : 
+        <input type="text" id="num">
+        <button type="button" value="submit" onclick="getNumber()">확인</button>
+ 
+    </span>
+    <span><button type="button" onclick="reload()" style="display:none;" id="load">새로고침</button></span>
+    <br>
+    <span>
+        <img id="change" src="/images/updowngame.jpg" width="100"/>
+    </span>
+ 
+ 
+    </fieldset>
+</body>
+</html>
+

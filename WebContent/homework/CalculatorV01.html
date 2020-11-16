@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator.html</title>
+    <style>
+    .bg { 
+        width: 350px;
+        height: 300px;
+        background-color: #DDDDDD;
+        border-radius: 10px;
+    }
+    tr.sc th{
+        padding: 30px;
+        border-radius: 10px;
+        background-color: #70C738;
+        color: #373737;
+        text-align: right;
+        font-size: 30pt;
+    }
+    tr.tab button{
+        background-color: #7B7B7B;
+        color: white;
+        border: solid #7B7B7B;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px;
+        width:100%
+    }
+    button.number{
+        background-color: #373737;
+        color: white;
+        padding: 20px 40px 20px;
+        border-radius: 10px;
+        border: 1px solid #373737;
+    }
+    button.cal{
+        padding: 20px 40px 20px;
+        border-radius: 10px;
+        background-color: #FA960A;
+        color: white;
+        border: 1px solid #FA960A;
+    }
+    button.cal1{
+        background-color: #373737;
+        color: white;
+        padding: 20px 40px 20px;
+        border-radius: 10px;
+        border: 1px solid #373737;
+    }
+
+    </style>
+    <script>
+        function input(num){
+            document.getElementById("display").innerHTML = num;
+        }
+        function inputCal(cal){
+            document.getElementById("display").innerHTML = cal;
+        }
+    </script>
+</head>
+<body>
+    <table class="bg">
+    <tr class="sc">
+        <th colspan="4" id="display"></th>
+    </tr>  
+    <tr class="tab">
+        <th colspan="2"><button type="button">BackSpace</button></th>
+        <th colspan="2"><button type="button">C</button></th>
+    </tr>
+    <tr>
+        <th><button type = "button" class="number" onclick="input(1);">1</th>
+        <th><button type = "button" class="number" onclick="input(2);">2</th>
+        <th><button type = "button" class="number" onclick="input(3);">3</th>
+        <th><button type = "button" class="cal" onclick="inputCal('/');">/</th>
+    </tr>
+    <tr>
+        <th><button type = "button" class="number" onclick="input(4);">4</button></th>
+        <th><button type = "button" class="number" onclick="input(5);">5</button></th>
+        <th><button type = "button" class="number" onclick="input(6);">6</button></th>
+        <th><button type = "button" class="cal" onclick="inputCal('-');">-</button></th>
+    </tr>
+    <tr>
+        <th><button type = "button" class="number" onclick="input(7);">7</button></th>
+        <th><button type = "button" class="number" onclick="input(8);">8</button></th>
+        <th><button type = "button" class="number" onclick="input(9);">9</button></th>
+        <th><button type = "button" class="cal" onclick="inputCal('×');">×</button></th>
+    </tr>
+    <tr>
+        <th><button type = "button" class="cal1" onclick="inputCal('=');">=</button></th>
+        <th><button type = "button" class="number" onclick="input(0);">0</button></th>
+        <th><button type = "button" class="cal1" onclick="inputCal('.');">.</button></th>
+        <th><button type = "button" class="cal" onclick="inputCal('÷');">÷</button></th>
+    </tr>
+    </table>
+</body>
+</html>
