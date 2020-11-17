@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J17CssControl.html</title>
+    <script>
+        //전역변수 : 기사부분의 폰트 사이즈를 저장
+        var pTag, pSize;
+
+        window.onload = function(){
+            pTag = document.getElementById("article");
+            //폰트사이즈 변경을 위해 숫자로 변경한다.
+            pSize = parseInt(pTag.style.fontSize);
+        }
+
+        function fnArticle(flag){
+            switch(flag){
+                /*
+                JS에서 CSS속성 컨트롤
+                    : DOM.style.CSS속성 = "속성값";
+                    CSS속성에 하이픈이 있다면 제거 후 첫 글자를 대문자로 변경한다.
+                    크기를 부여할 때는 반드시 px와 같은 단위를 기술한다.
+                */
+                case "+":
+                    pSize += 10;
+                    pTag.style.fontSize = pSize+"px";
+                    break;
+                case "-":
+                    pSize -= 10;
+                    pTag.style.fontSize = pSize+"px";
+                    break;
+                case "R":
+                    pTag.style.color = "red";
+                    break;
+                case "G":
+                    pTag.style.color = "green";
+                    break;
+                case "B":
+                    pTag.style.color = "blue";
+                    break;
+                case "Bo":
+                    pTag.style.fontWeight = "bold";
+                    break;
+                case "No":
+                    pTag.style.fontWeight = "normal";
+                    break;
+                case "Ce":
+                    pTag.style.textAlign = "center";
+                    break;
+                case "Le":
+                    pTag.style.textAlign = "left";
+                    break;
+                default:
+                    pTag.style.color = "black";
+            }
+        }
+
+        /*
+        문제] 글꼴바꾸기 버튼을 계속 누를때마다 아래 5가지
+        폰트가 토글되어 적용될수 있도록 함수를 정의하시오.
+        글꼴 : Verdana, 굴림체, 휴먼옛체, 궁서, Impact
+
+        function setFont(){
+            실행부;
+        }
+        */
+
+        var fontToggle = 0; //폰트 토글을 위한 전역변수
+        function setFont() {
+            //문제에서 주어진 폰트를 배열로 선언
+            var fontArray = ['Verdana', '굴림체', '휴먼옛체', '궁서', 'Impact'];
+            //정수를 5로 나누면 나머지는 0~4까지 생성됨
+            var fontIndex = fontToggle % 5;
+            //위에서 구한 수를 인덱스로 사용하여 폰트를 설정
+            pTag.style.fontFamily = fontArray[fontIndex];
+            //함수를 호출할 때마다 전역변수 증가
+            fontToggle++;
+        
+        }
+        /*
+        var count=0;
+        function setFont(){
+            count++;
+
+            if(count==1){
+                pTag.style.fontFamily="Verdana";
+            }
+            if(count==2){
+                pTag.style.fontFamily="굴림체";
+            }
+            if(count==3){
+                pTag.style.fontFamily="휴먼옛체";
+            }
+            if(count==4){
+                pTag.style.fontFamily="궁서";
+            }
+            if(count==5){
+                pTag.style.fontFamily="Impact";
+                count=0;
+            }
+            
+        }
+        */
+    </script>
+</head>
+<body>
+    <h2>자바스크립트로 CSS제어하기</h2>
+
+    <input type="button" value="글꼴바꾸기" onclick="setFont();">
+    <fieldset>
+        <legend>신문기사</legend>
+        <button onclick="fnArticle('+');">+</button>
+        <button onclick="fnArticle('-');">-</button>
+        <button onclick="fnArticle('R');">Red</button>
+        <button onclick="fnArticle('G');">Green</button>
+        <button onclick="fnArticle('B');">Blue</button>
+        <button onclick="fnArticle('');">Black</button>
+        <button onclick="fnArticle('Bo');">볼드체</button>
+        <button onclick="fnArticle('No');">보통체</button>
+        <button onclick="fnArticle('Ce');">가운데정렬</button>
+        <button onclick="fnArticle('Le');">좌측정렬</button>
+    </fieldset>
+    <p style="font-size:12px;" id="article">
+    삼성바이오로직스, 릴리 항체치료제 생산 개시..두 번째 코로나 계약 (종합)<br><br>
+    [서울=뉴시스] 송연주 기자 = 삼성바이오로직스는 미국 일라이 릴리와 
+    코로나19 항체 치료제의 장기 생산 계약을 맺고 치료제 생산을 개시했다고 
+    17일 밝혔다.
+    <br><br>
+    이에 따라 릴리가 개발한 코로나19 중화 항체 치료제를 삼성바이오로직스가 
+    대량 생산하게 된다. 이는 지난 4월 삼성이 영국 제약회사 글락소스미스클라인(GSK)의 
+    코로나19 항체 치료제 생산을 맡게 된 후 두 번째 코로나19 관련 계약이다.
+    <br><br>
+    앞서 양사는 지난 5월 해당 위탁생산(CMO) 계약을 체결했다. 
+    당시는 삼성이 계약 당사자를 공개하지 않았으나 지난 9일(현지시간) 릴리가 
+    미국 식품의약국(FDA)에서 코로나19 항체 치료제의 긴급사용승인을 받으면서 
+    이번에 공개하게 됐다.
+    <br><br>
+    삼성바이오로직스는 코로나19 대유행의 장기화로 원료를 안정적으로 확보하는 것이 
+    어려웠음에도 릴리와의 협업을 강화해 계약 체결 5개월 만에 GMP
+    (우수 의약품 제조 및 품질 관리 기준)에 부합하는 초기 물량을 생산하고 
+    릴리에 전달했다.
+    <br><br>
+    또 바이오 의약품 생산에 필수적인 기술 이전 기간을 약 3개월로 대폭 단축했다.
+    </p>
+
+
+</body>
+</html>
