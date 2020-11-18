@@ -54,35 +54,43 @@
 
     </style>
     <script>
+        var count = 0;
         function input(num){
             lcd.value = num;
             document.getElementById("lcd").innerHTML = lcd.value;
 
             allOf.value += lcd.value;
-            document.getElementById("allOF") = allOf.value;
-            
+            document.getElementById("allOF") = allOf.value; 
         }
         function inputCal(cal){
-            allOf.value += cal;
-
             onlyCal.value = allOf.value.substring(allOf.value.length-1);
             document.getElementById("onlyCal").innerHTML = 
                             onlyCal.value;
+            if(count>0){
+                var str = allOf.value;
+                allOf.value = str.slice(0,-1);
+                allOf.value += cal;
+            }
+            else{
+            allOf.value += cal;
+            count++;
+            }
         }
         function del(){
             lcd.value = lcd.value.substring(0,lcd.value.length-1);
         }
         function allDel(){
-            allOf.value =null;
-            lcd.value = null;
+            location.reload();
         }
         function result(){
             lcd.value = eval(allOf.value);
+            allOf.value = eval(allOf.value);
         }
     </script>
 </head>
 <body>
     <table class="bg">
+    
     <input type="text" id="allOf">
     <input type="text" id="onlyCal">
     <tr class="sc">
