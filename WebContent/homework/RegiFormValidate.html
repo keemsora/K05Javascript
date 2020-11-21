@@ -39,10 +39,16 @@
     .wrap_regiform table tr td input{
         padding: 8px; border: 1px solid #cccccc;
     }
-    .w01{width:320px;}
+    .w01, .pw{width:320px;}
     .w02{width:200px;}
     .w03{width:100px;}
     .w04{width:230px;}
+    .ph{width:70px; height: 37px;}
+    .ph1, .ph2{width:100px; margin-left: 5px;}
+    .email1{width:150px;}
+    .email2{width:150px; margin-left: 5px;}
+    .emailaddr{width:137px; height:37px;}
+    .red{color:red; margin-left:40px;}
     </style>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
@@ -62,6 +68,45 @@
             }
         }).open();
     }
+    function focusMove(obj, maxLength, next_obj){
+
+        var strLength = obj.value.length;
+
+        if(strLength>=maxLength){
+            document.getElementById(next_obj).focus();
+        }
+    }
+    function put(){
+        var selectValue = document.getElementById('eaddr').value;
+        if(selectValue=="byself"){
+            selectValue=null;
+            document.getElementById('putaddr').focus();
+        }
+        document.getElementById('putaddr').value = selectValue;
+
+
+    }
+    function check(){
+
+        var userid = document.getElementById('id').value;
+        var pattern_num = /[0-9]/;
+        var pattern_eng = /[a-zA-Z]/;
+        var pattren_spc = /[~!@#$%^&*()_+|<>?:{}]/;
+
+        if(userid==""){
+            alert("아이디를 입력하세요.");
+            if('0'<=userid.charAt(0) && userid.charAt(0)<='9'){
+                alert("아이디의 첫 문자는 숫자로 시작할 수 없습니다.");
+                if(12<userid.length && userid.length<8){
+                    alert("아이디는 8~12자 사이여야 합니다.");
+                    if((pattern_spc.test(userid)){
+                        alert("특수문자는 사용 불가합니다.");
+                    }
+                }
+            }               
+        }
+    }
+
 </script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -97,8 +142,52 @@
             <tr>
                 <td><span class="red">*</span> 아이디</td>
                 <td>
-                    <input type="text" class="w01" name="userid" value="" />       
-                    <button type="button" onclick="">중복확인</button>             
+                    <input type="text" class="w01" id="id" />       
+                    <button type="button" onclick="check();">중복확인</button>             
+                </td>
+            </tr>
+            <tr>
+                <td><span class="red">*</span> 패스워드</td>
+                <td>
+                    <input type="text" class="pw">
+                </td>
+            </tr>
+            <tr>
+                <td><span class="red">*</span> 패스워드확인</td>
+                <td>
+                    <input type="text" class="pw">
+                </td>
+            </tr>
+            <tr>
+                <td><span class="red">*</span> 이름</td>
+                <td>
+                    <input type="text" class="w01" name="name" value="" />
+                    
+                    <label for="radio-1">남</label>
+                    <input type="radio" name="gender" id="radio-1">
+                    <label for="radio-2">여</label>
+                    <input type="radio" name="gender" id="radio-2" checked>                    
+                </td>
+            </tr>
+            <tr>
+                <td><span class="red">*</span> 생년월일</td>
+                <td>
+                    <input type="text" class="w02" name="birthday" id="birthday" value="" />
+                    <img src="/images/pick.jpg" alt="" class="pick" />
+                </td>
+            </tr>
+            <tr>
+                <td><span class="red">*</span> 휴대폰번호</td>
+                <td>
+                    <select class="ph">
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="012">012</option>
+                        <option value="014">014</option>
+                        <option value="017">017</option>
+                    </select>
+                    -<input type="text" class="ph1" onkeyup="focusMove(this, 4, 'ph2');">
+                    -<input type="text" class="ph2" id="ph2" maxlength="4">
                 </td>
             </tr>
             <tr>
@@ -117,30 +206,21 @@
                     <input type="text" class="w04" name="address2" value="" />
                 </td>
             </tr>
-
             <tr>
-                <td><span class="red">*</span> 이름</td>
+                <td><span class="red">*</span> 이메일</td>
                 <td>
-                    <input type="text" class="w01" name="name" value="" />
-                    
-                    <label for="radio-1">남</label>
-                    <input type="radio" name="gender" id="radio-1">
-                    <label for="radio-2">여</label>
-                    <input type="radio" name="gender" id="radio-2" checked>                    
-                </td>
-            </tr>
-            <tr>
-                <td><span class="red">*</span> 생년월일</td>
-                <td style="padding: 0px 0 5px 5px;">
-                    <input type="text" class="w02" name="birthday" id="birthday" value="" />
-                    <img src="/images/pick.jpg" alt="" class="pick" />
+                    <input type="text" class="email1">
+                    @<input type="text" class="email2" id="putaddr">
+                    <select class="emailaddr" id="eaddr" onchange="put(this);">
+                        <option value="byself">직접입력</option>
+                        <option value="gamil.com">gmail.com</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="nate.com">nate.com</option>
+                    </select>
                 </td>
             </tr>
 
-            <tr>
-                <td></td>
-                <td></td>
-            </tr>
         </table>
     </form>
     </div>
